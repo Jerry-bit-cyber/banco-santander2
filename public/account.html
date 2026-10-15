@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es-MX" data-lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Santander México — apertura de cuenta con verificación de identidad.">
+    <title>Abrir Cuenta — Santander México</title>
+
+    <link rel="stylesheet" href="/css/santander.css">
+
+    <script>
+      window.__SANTANDER_PAGE_DICT__ = {
+        es: {
+          'acc.eyebrow':              'Apertura de cuenta',
+          'acc.title':                'Abre tu cuenta Santander México',
+          'acc.lede':                 'Completa tus datos personales, sube tu identificación oficial y activa tu cuenta. Todo desde aquí, en minutos.',
+
+          'acc.step_1':               'Datos personales',
+          'acc.step_2':               'Identificación oficial',
+          'acc.step_3':               'Domicilio y contacto',
+          'acc.step_4':               'Activar cuenta',
+
+          'acc.personal_title':       'Datos personales',
+          'acc.personal_subtitle':    'Tal como aparecen en tu identificación oficial.',
+
+          'acc.fullname_label':       'Nombre completo',
+          'acc.fullname_ph':          'Carlos Hernández López',
+          'acc.birthdate_label':      'Fecha de nacimiento',
+          'acc.curp_label':           'CURP',
+          'acc.curp_ph':              'HELC900101HDFRPR09',
+          'acc.curp_hint':            '18 caracteres. Aparece en tu identificación oficial.',
+          'acc.rfc_label':            'RFC (Registro Federal de Contribuyentes)',
+          'acc.rfc_ph':               'HELC900101ABC',
+          'acc.rfc_hint':             '13 caracteres para personas físicas.',
+
+          'acc.id_title':             'Identificación oficial',
+          'acc.id_subtitle':          'Sube una foto clara por ambos lados. Acepta: INE, pasaporte, cédula profesional.',
+          'acc.id_front_label':       'Frente de la identificación',
+          'acc.id_back_label':        'Reverso de la identificación',
+          'acc.id_choose':            'Elegir archivo…',
+          'acc.id_hint':              'JPG o PNG. Máximo 5 MB.',
+          'acc.photo_label':          'Foto de perfil',
+          'acc.photo_subtitle':       'Se usará en tu cuenta y en tus operaciones.',
+
+          'acc.contact_title':        'Domicilio y contacto',
+          'acc.contact_subtitle':     'Necesitamos un domicilio y contacto válidos.',
+
+          'acc.street_label':         'Calle',
+          'acc.street_ph':            'Av. Paseo de la Reforma',
+          'acc.number_label':         'Número',
+          'acc.number_ph':            '123',
+          'acc.colonia_label':        'Colonia',
+          'acc.colonia_ph':           'Juárez',
+          'acc.cp_label':             'Código Postal',
+          'acc.cp_ph':                '06600',
+          'acc.city_label':           'Ciudad',
+          'acc.city_ph':              'Ciudad de México',
+          'acc.state_label':          'Estado',
+          'acc.state_ph':             'CDMX',
+          'acc.phone_label':          'Teléfono',
+          'acc.phone_ph':             '+52 55 1234 5678',
+          'acc.email_label':          'Correo electrónico',
+          'acc.email_ph':             'carlos.hernandez@correo.mx',
+          'acc.password_label':       'Contraseña',
+          'acc.password_ph':          'Mínimo 8 caracteres',
+          'acc.password_hint':        'Al menos 8 caracteres con letras y números.',
+
+          'acc.rules_title':          'Reglas para activar tu cuenta',
+          'acc.rule_1':               'Debes ser mayor de 18 años.',
+          'acc.rule_2':               'Tu identificación oficial debe estar vigente y ser legible.',
+          'acc.rule_3':               'El CURP y el RFC deben coincidir con tu identificación.',
+          'acc.rule_4':               'La foto de perfil debe mostrar tu rostro con claridad.',
+          'acc.rule_5':               'Al activar, aceptas los términos y el aviso de privacidad.',
+          'acc.agree':                'Acepto los términos y el aviso de privacidad.',
+
+          'acc.submit':               'Crear cuenta',
+          'acc.submitting':           'Creando cuenta…',
+          'acc.activate':             'Activar cuenta',
+          'acc.activating':           'Activando…',
+          'acc.activated_title':      '¡Cuenta activada!',
+          'acc.activated_text':       'Tu cuenta Santander México está lista. Ya puedes iniciar sesión.',
+          'acc.activated_login':      'Iniciar sesión',
+
+          'acc.opened_title':         'Tu cuenta',
+          'acc.opened_holder':        'Titular',
+          'acc.opened_id':            'No. de identificación',
+          'acc.opened_email':         'Correo',
+          'acc.opened_rfc':           'RFC',
+          'acc.opened_status':        'Estado',
+          'acc.opened_status_active': 'Activa',
+          'acc.opened_status_pending':'Pendiente de activación',
+
+          'acc.have_account':         '¿Ya tienes cuenta?',
+          'acc.have_account_link':    'Inicia sesión',
+
+          'acc.error_required':       'Por favor completa todos los campos obligatorios.',
+          'acc.error_email':          'El correo no es válido.',
+          'acc.error_phone':          'El teléfono no es válido.',
+          'acc.error_password':       'La contraseña debe tener al menos 8 caracteres.',
+          'acc.error_curp':           'El CURP debe tener 18 caracteres.',
+          'acc.error_rfc':            'El RFC debe tener 12 o 13 caracteres.',
+          'acc.error_cp':             'El código postal debe tener 5 dígitos.',
+          'acc.error_id_front':       'Sube el frente de tu identificación.',
+          'acc.error_id_back':        'Sube el reverso de tu identificación.',
+          'acc.error_photo':          'Sube una foto de perfil.',
+          'acc.error_file_size':      'El archivo es demasiado grande (máximo 5 MB).',
+          'acc.error_file_type':      'Formato no soportado. Usa JPG o PNG.',
+          'acc.error_agree':          'Debes aceptar los términos para activar.',
+          'acc.error_server':         'No se pudo completar la operación. Intenta de nuevo.',
+          'acc.error_duplicate':      'Ya existe una cuenta con ese correo.'
+        },
+        en: {
+          'acc.eyebrow':              'Account opening',
+          'acc.title':                'Open your Santander México account',
+          'acc.lede':                 'Fill in your personal details, upload your official ID and activate your account. All from here, in minutes.',
+
+          'acc.step_1':               'Personal details',
+          'acc.step_2':               'Official ID',
+          'acc.step_3':               'Address and contact',
+          'acc.step_4':               'Activate account',
+
+          'acc.personal_title':       'Personal details',
+          'acc.personal_subtitle':    'Exactly as they appear on your official ID.',
+
+          'acc.fullname_label':       'Full name',
+          'acc.fullname_ph':          'Carlos Hernández López',
+          'acc.birthdate_label':      'Date of birth',
+          'acc.curp_label':           'CURP',
+          'acc.curp_ph':              'HELC900101HDFRPR09',
+          'acc.curp_hint':            '18 characters. Appears on your official ID.',
+          'acc.rfc_label':            'RFC (Tax Identification Number)',
+          'acc.rfc_ph':               'HELC900101ABC',
+          'acc.rfc_hint':             '13 characters for individuals.',
+
+          'acc.id_title':             'Official ID',
+          'acc.id_subtitle':          'Upload a clear photo of both sides. Accepts: INE, passport, professional license.',
+          'acc.id_front_label':       'Front of ID',
+          'acc.id_back_label':        'Back of ID',
+          'acc.id_choose':            'Choose file…',
+          'acc.id_hint':              'JPG or PNG. Max 5 MB.',
+          'acc.photo_label':          'Profile photo',
+          'acc.photo_subtitle':       'Used in your account and on your operations.',
+
+          'acc.contact_title':        'Address and contact',
+          'acc.contact_subtitle':     'We need a valid address and contact.',
+
+          'acc.street_label':         'Street',
+          'acc.street_ph':            'Av. Paseo de la Reforma',
+          'acc.number_label':         'Number',
+          'acc.number_ph':            '123',
+          'acc.colonia_label':        'Neighborhood',
+          'acc.colonia_ph':           'Juárez',
+          'acc.cp_label':             'Postal code',
+          'acc.cp_ph':                '06600',
+          'acc.city_label':           'City',
+          'acc.city_ph':              'Mexico City',
+          'acc.state_label':          'State',
+          'acc.state_ph':             'CDMX',
+          'acc.phone_label':          'Phone',
+          'acc.phone_ph':             '+52 55 1234 5678',
+          'acc.email_label':          'Email',
+          'acc.email_ph':             'carlos.hernandez@mail.mx',
+          'acc.password_label':       'Password',
+          'acc.password_ph':          'At least 8 characters',
+          'acc.password_hint':        'At least 8 characters with letters and numbers.',
+
+          'acc.rules_title':          'Rules to activate your account',
+          'acc.rule_1':               'You must be over 18 years old.',
+          'acc.rule_2':               'Your official ID must be valid and legible.',
+          'acc.rule_3':               'CURP and RFC must match your ID.',
+          'acc.rule_4':               'Your profile photo must clearly show your face.',
+          'acc.rule_5':               'By activating, you accept the terms and privacy notice.',
+          'acc.agree':                'I accept the terms and privacy notice.',
+
+          'acc.submit':               'Create account',
+          'acc.submitting':           'Creating account…',
+          'acc.activate':             'Activate account',
+          'acc.activating':           'Activating…',
+          'acc.activated_title':      'Account activated!',
+          'acc.activated_text':       'Your Santander México account is ready. You can now sign in.',
+          'acc.activated_login':      'Sign in',
+
+          'acc.opened_title':         'Your account',
+          'acc.opened_holder':        'Holder',
+          'acc.opened_id':            'ID number',
+          'acc.opened_email':         'Email',
+          'acc.opened_rfc':           'RFC',
+          'acc.opened_status':        'Status',
+          'acc.opened_status_active': 'Active',
+          'acc.opened_status_pending':'Pending activation',
+
+          'acc.have_account':         'Already have an account?',
+          'acc.have_account_link':    'Sign in',
+
+          'acc.error_required':       'Please complete all required fields.',
+          'acc.error_email':          'Email is not valid.',
+          'acc.error_phone':          'Phone is not valid.',
+          'acc.error_password':       'Password must be at least 8 characters.',
+          'acc.error_curp':           'CURP must be 18 characters.',
+          'acc.error_rfc':            'RFC must be 12 or 13 characters.',
+          'acc.error_cp':             'Postal code must be 5 digits.',
+          'acc.error_id_front':       'Upload the front of your ID.',
+          'acc.error_id_back':        'Upload the back of your ID.',
+          'acc.error_photo':          'Upload a profile photo.',
+          'acc.error_file_size':      'File is too large (max 5 MB).',
+          'acc.error_file_type':      'Unsupported format. Use JPG or PNG.',
+          'acc.error_agree':          'You must accept the terms to activate.',
+          'acc.error_server':         'Could not complete the operation. Please try again.',
+          'acc.error_duplicate':      'An account with that email already exists.'
+        }
+      };
+    </script>
+
+    <style>
+      /* Page-scoped styles — only what is unique to this page. */
+      .acc-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+      @media (min-width: 700px) {
+        .acc-grid-2 { grid-template-columns: 1fr 1fr; }
+        .acc-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+      }
+      .acc-step {
+        display: flex; align-items: center; gap: 10px;
+        font-size: var(--fs-sm); font-weight: 600;
+        color: var(--santander-gray-700);
+      }
+      .acc-step__num {
+        width: 26px; height: 26px; border-radius: 50%;
+        display: inline-flex; align-items: center; justify-content: center;
+        background: var(--santander-red-light); color: var(--santander-red);
+        font-size: var(--fs-xs);
+      }
+      .acc-uploader {
+        border: 1.5px dashed var(--santander-gray-300);
+        border-radius: var(--radius-md);
+        padding: var(--space-4);
+        background: var(--santander-white);
+        cursor: pointer;
+        transition: border-color var(--t-fast), background var(--t-fast);
+      }
+      .acc-uploader:hover {
+        border-color: var(--santander-red);
+        background: var(--santander-red-light);
+      }
+      .acc-uploader input[type="file"] { display: none; }
+      .acc-uploader__title {
+        font-weight: 600; color: var(--santander-dark);
+        margin-bottom: 4px;
+      }
+      .acc-uploader__hint {
+        font-size: var(--fs-xs); color: var(--santander-gray-500);
+      }
+      .acc-preview {
+        margin-top: var(--space-3);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--santander-gray-300);
+        max-height: 180px;
+        object-fit: contain;
+        display: none;
+      }
+      .acc-preview.is-visible { display: block; }
+      .acc-avatar {
+        width: 96px; height: 96px; border-radius: 50%;
+        border: 3px solid var(--santander-red);
+        object-fit: cover; background: var(--santander-gray-100);
+        display: none;
+      }
+      .acc-avatar.is-visible { display: block; }
+      .acc-rules {
+        list-style: none; padding: 0; margin: 0;
+        display: grid; gap: 8px;
+      }
+      .acc-rules li {
+        display: flex; align-items: flex-start; gap: 10px;
+        font-size: var(--fs-sm); color: var(--santander-gray-900);
+      }
+      .acc-rules li::before {
+        content: ""; flex: 0 0 18px; height: 18px; margin-top: 2px;
+        background: var(--santander-red-light);
+        border-radius: 50%;
+        background-image:
+          linear-gradient(var(--santander-red), var(--santander-red));
+        background-size: 0 0;
+      }
+      .acc-rules li svg { flex: 0 0 18px; margin-top: 2px; color: var(--santander-red); }
+      .acc-opened-card {
+        display: grid; gap: 1rem; grid-template-columns: auto 1fr;
+        align-items: center;
+      }
+      .acc-opened-meta {
+        display: grid; gap: 4px;
+      }
+      .acc-opened-meta .row {
+        display: flex; gap: 8px; font-size: var(--fs-sm);
+      }
+      .acc-opened-meta .row strong { min-width: 120px; color: var(--santander-gray-700); }
+      .acc-hidden { display: none !important; }
+    </style>
+
+    <script src="/js/santander.js" defer></script>
+    <script src="/js/account.js" defer></script>
+</head>
+<body>
+
+    <div id="santander-header"></div>
+
+    <main class="s-main">
+        <div class="s-container">
+
+            <!-- Intro -->
+            <div class="s-mt-4">
+                <span class="s-hero__eyebrow" data-i18n="acc.eyebrow">Apertura de cuenta</span>
+                <h1 class="s-mb-0" data-i18n="acc.title">Abre tu cuenta Santander México</h1>
+                <p class="s-muted" data-i18n="acc.lede">
+                    Completa tus datos personales, sube tu identificación oficial y activa tu cuenta.
+                    Todo desde aquí, en minutos.
+                </p>
+            </div>
+
+            <!-- Step indicator -->
+            <div class="s-row s-mt-4" style="flex-wrap: wrap; gap: 1rem;">
+                <div class="acc-step"><span class="acc-step__num">1</span><span data-i18n="acc.step_1">Datos personales</span></div>
+                <div class="acc-step"><span class="acc-step__num">2</span><span data-i18n="acc.step_2">Identificación oficial</span></div>
+                <div class="acc-step"><span class="acc-step__num">3</span><span data-i18n="acc.step_3">Domicilio y contacto</span></div>
+                <div class="acc-step"><span class="acc-step__num">4</span><span data-i18n="acc.step_4">Activar cuenta</span></div>
+            </div>
+
+            <!-- Global error region -->
+            <div
+                id="account-error"
+                class="s-alert s-alert--danger s-hidden s-mt-4"
+                role="alert"
+                aria-live="polite"
+            ></div>
+
+            <!-- ============================================================
+                 FORM
+                 ============================================================ -->
+            <form id="account-form" novalidate class="s-mt-6">
+
+                <!-- STEP 1 — Personal details -->
+                <section class="s-card">
+                    <h2 class="s-card__title" data-i18n="acc.personal_title">Datos personales</h2>
+                    <p class="s-card__subtitle" data-i18n="acc.personal_subtitle">
+                        Tal como aparecen en tu identificación oficial.
+                    </p>
+
+                    <div class="s-field">
+                        <label class="s-field__label" for="full-name"
+                               data-i18n="acc.fullname_label">Nombre completo</label>
+                        <input type="text" id="full-name" name="full-name"
+                               class="s-field__input" autocomplete="name" required
+                               data-i18n-placeholder="acc.fullname_ph"
+                               placeholder="Carlos Hernández López">
+                    </div>
+
+                    <div class="acc-grid acc-grid-2">
+                        <div class="s-field">
+                            <label class="s-field__label" for="birthdate"
+                                   data-i18n="acc.birthdate_label">Fecha de nacimiento</label>
+                            <input type="date" id="birthdate" name="birthdate"
+                                   class="s-field__input" required>
+                        </div>
+
+                        <div class="s-field">
+                            <label class="s-field__label" for="curp"
+                                   data-i18n="acc.curp_label">CURP</label>
+                            <input type="text" id="curp" name="curp"
+                                   class="s-field__input" maxlength="18"
+                                   autocapitalize="characters" spellcheck="false"
+                                   required
+                                   data-i18n-placeholder="acc.curp_ph"
+                                   placeholder="HELC900101HDFRPR09">
+                            <span class="s-field__hint" data-i18n="acc.curp_hint">
+                                18 caracteres. Aparece en tu identificación oficial.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="s-field">
+                        <label class="s-field__label" for="rfc"
+                               data-i18n="acc.rfc_label">RFC (Registro Federal de Contribuyentes)</label>
+                        <input type="text" id="rfc" name="rfc"
+                               class="s-field__input" maxlength="13"
+                               autocapitalize="characters" spellcheck="false"
+                               required
+                               data-i18n-placeholder="acc.rfc_ph"
+                               placeholder="HELC900101ABC">
+                        <span class="s-field__hint" data-i18n="acc.rfc_hint">
+                            13 caracteres para personas físicas.
+                        </span>
+                    </div>
+                </section>
+
+                <!-- STEP 2 — ID and photo -->
+                <section class="s-card s-mt-6">
+                    <h2 class="s-card__title" data-i18n="acc.id_title">Identificación oficial</h2>
+                    <p class="s-card__subtitle" data-i18n="acc.id_subtitle">
+                        Sube una foto clara por ambos lados. Acepta: INE, pasaporte, cédula profesional.
+                    </p>
+
+                    <div class="acc-grid acc-grid-2">
+
+                        <!-- ID front -->
+                        <div>
+                            <div class="s-field__label" data-i18n="acc.id_front_label">
+                                Frente de la identificación
+                            </div>
+                            <label class="acc-uploader" for="id-front">
+                                <div class="acc-uploader__title" data-i18n="acc.id_choose">Elegir archivo…</div>
+                                <div class="acc-uploader__hint" data-i18n="acc.id_hint">JPG o PNG. Máximo 5 MB.</div>
+                                <input type="file" id="id-front" name="id-front" accept="image/jpeg,image/png">
+                            </label>
+                            <img id="id-front-preview" class="acc-preview" alt="">
+                        </div>
+
+                        <!-- ID back -->
+                        <div>
+                            <div class="s-field__label" data-i18n="acc.id_back_label">
+                                Reverso de la identificación
+                            </div>
+                            <label class="acc-uploader" for="id-back">
+                                <div class="acc-uploader__title" data-i18n="acc.id_choose">Elegir archivo…</div>
+                                <div class="acc-uploader__hint" data-i18n="acc.id_hint">JPG o PNG. Máximo 5 MB.</div>
+                                <input type="file" id="id-back" name="id-back" accept="image/jpeg,image/png">
+                            </label>
+                            <img id="id-back-preview" class="acc-preview" alt="">
+                        </div>
+
+                    </div>
+
+                    <!-- Profile photo -->
+                    <div class="s-mt-4">
+                        <div class="s-field__label" data-i18n="acc.photo_label">Foto de perfil</div>
+                        <p class="s-text-xs s-muted" data-i18n="acc.photo_subtitle">
+                            Se usará en tu cuenta y en tus operaciones.
+                        </p>
+                        <div class="s-row" style="align-items: flex-start; gap: 1rem;">
+                            <img id="photo-preview" class="acc-avatar" alt="">
+                            <label class="acc-uploader" for="photo" style="flex: 1;">
+                                <div class="acc-uploader__title" data-i18n="acc.id_choose">Elegir archivo…</div>
+                                <div class="acc-uploader__hint" data-i18n="acc.id_hint">JPG o PNG. Máximo 5 MB.</div>
+                                <input type="file" id="photo" name="photo" accept="image/jpeg,image/png">
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STEP 3 — Address and contact -->
+                <section class="s-card s-mt-6">
+                    <h2 class="s-card__title" data-i18n="acc.contact_title">Domicilio y contacto</h2>
+                    <p class="s-card__subtitle" data-i18n="acc.contact_subtitle">
+                        Necesitamos un domicilio y contacto válidos.
+                    </p>
+
+                    <div class="acc-grid acc-grid-3">
+                        <div class="s-field" style="grid-column: span 2;">
+                            <label class="s-field__label" for="street"
+                                   data-i18n="acc.street_label">Calle</label>
+                            <input type="text" id="street" name="street"
+                                   class="s-field__input" autocomplete="address-line1" required
+                                   data-i18n-placeholder="acc.street_ph"
+                                   placeholder="Av. Paseo de la Reforma">
+                        </div>
+                        <div class="s-field">
+                            <label class="s-field__label" for="number"
+                                   data-i18n="acc.number_label">Número</label>
+                            <input type="text" id="number" name="number"
+                                   class="s-field__input" required
+                                   data-i18n-placeholder="acc.number_ph"
+                                   placeholder="123">
+                        </div>
+                    </div>
+
+                    <div class="acc-grid acc-grid-3">
+                        <div class="s-field">
+                            <label class="s-field__label" for="colonia"
+                                   data-i18n="acc.colonia_label">Colonia</label>
+                            <input type="text" id="colonia" name="colonia"
+                                   class="s-field__input" autocomplete="address-line2" required
+                                   data-i18n-placeholder="acc.colonia_ph"
+                                   placeholder="Juárez">
+                        </div>
+                        <div class="s-field">
+                            <label class="s-field__label" for="cp"
+                                   data-i18n="acc.cp_label">Código Postal</label>
+                            <input type="text" id="cp" name="cp"
+                                   class="s-field__input" inputmode="numeric" maxlength="5"
+                                   autocomplete="postal-code" required
+                                   data-i18n-placeholder="acc.cp_ph"
+                                   placeholder="06600">
+                        </div>
+                        <div class="s-field">
+                            <label class="s-field__label" for="city"
+                                   data-i18n="acc.city_label">Ciudad</label>
+                            <input type="text" id="city" name="city"
+                                   class="s-field__input" autocomplete="address-level2" required
+                                   data-i18n-placeholder="acc.city_ph"
+                                   placeholder="Ciudad de México">
+                        </div>
+                    </div>
+
+                    <div class="acc-grid acc-grid-2">
+                        <div class="s-field">
+                            <label class="s-field__label" for="state"
+                                   data-i18n="acc.state_label">Estado</label>
+                            <input type="text" id="state" name="state"
+                                   class="s-field__input" autocomplete="address-level1" required
+                                   data-i18n-placeholder="acc.state_ph"
+                                   placeholder="CDMX">
+                        </div>
+                        <div class="s-field">
+                            <label class="s-field__label" for="phone"
+                                   data-i18n="acc.phone_label">Teléfono</label>
+                            <input type="tel" id="phone" name="phone"
+                                   class="s-field__input" autocomplete="tel"
+                                   inputmode="tel" required
+                                   data-i18n-placeholder="acc.phone_ph"
+                                   placeholder="+52 55 1234 5678">
+                        </div>
+                    </div>
+
+                    <div class="acc-grid acc-grid-2">
+                        <div class="s-field">
+                            <label class="s-field__label" for="email"
+                                   data-i18n="acc.email_label">Correo electrónico</label>
+                            <input type="email" id="email" name="email"
+                                   class="s-field__input" autocomplete="email"
+                                   autocapitalize="none" spellcheck="false" required
+                                   data-i18n-placeholder="acc.email_ph"
+                                   placeholder="carlos.hernandez@correo.mx">
+                        </div>
+                        <div class="s-field">
+                            <label class="s-field__label" for="password"
+                                   data-i18n="acc.password_label">Contraseña</label>
+                            <input type="password" id="password" name="password"
+                                   class="s-field__input" autocomplete="new-password"
+                                   minlength="8" required
+                                   data-i18n-placeholder="acc.password_ph"
+                                   placeholder="Mínimo 8 caracteres">
+                            <span class="s-field__hint" data-i18n="acc.password_hint">
+                                Al menos 8 caracteres con letras y números.
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STEP 4 — Rules + activation -->
+                <section class="s-card s-mt-6">
+                    <h2 class="s-card__title" data-i18n="acc.rules_title">Reglas para activar tu cuenta</h2>
+
+                    <ul class="acc-rules s-mt-4">
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span data-i18n="acc.rule_1">Debes ser mayor de 18 años.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span data-i18n="acc.rule_2">Tu identificación oficial debe estar vigente y ser legible.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span data-i18n="acc.rule_3">El CURP y el RFC deben coincidir con tu identificación.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span data-i18n="acc.rule_4">La foto de perfil debe mostrar tu rostro con claridad.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span data-i18n="acc.rule_5">Al activar, aceptas los términos y el aviso de privacidad.</span>
+                        </li>
+                    </ul>
+
+                    <label class="s-row s-mt-4" style="align-items: flex-start; cursor: pointer;">
+                        <input type="checkbox" id="agree" name="agree" required
+                               style="margin-top: 3px;">
+                        <span data-i18n="acc.agree">Acepto los términos y el aviso de privacidad.</span>
+                    </label>
+
+                    <div class="s-row s-mt-6" style="flex-wrap: wrap;">
+                        <button type="submit" id="account-submit"
+                                class="s-btn s-btn--primary s-btn--lg"
+                                data-i18n="acc.activate">Activar cuenta</button>
+                        <span class="s-text-xs s-muted" id="account-status-line"></span>
+                    </div>
+                </section>
+
+            </form>
+
+            <!-- ============================================================
+                 RESULT PANEL — shown after successful submission
+                 ============================================================ -->
+            <section id="account-result" class="s-card s-card--elevated s-mt-6 acc-hidden">
+                <h2 class="s-card__title" data-i18n="acc.opened_title">Tu cuenta</h2>
+
+                <div class="acc-opened-card s-mt-4">
+                    <img id="result-photo" class="acc-avatar is-visible" alt="Foto de perfil">
+
+                    <div class="acc-opened-meta">
+                        <div class="row">
+                            <strong data-i18n="acc.opened_holder">Titular</strong>
+                            <span id="result-holder">—</span>
+                        </div>
+                        <div class="row">
+                            <strong data-i18n="acc.opened_id">No. de identificación</strong>
+                            <span id="result-id" style="font-family: var(--font-mono);">—</span>
+                        </div>
+                        <div class="row">
+                            <strong data-i18n="acc.opened_email">Correo</strong>
+                            <span id="result-email">—</span>
+                        </div>
+                        <div class="row">
+                            <strong data-i18n="acc.opened_rfc">RFC</strong>
+                            <span id="result-rfc" style="font-family: var(--font-mono);">—</span>
+                        </div>
+                        <div class="row">
+                            <strong data-i18n="acc.opened_status">Estado</strong>
+                            <span id="result-status" class="s-badge s-badge--pending"
+                                  data-i18n="acc.opened_status_pending">Pendiente de activación</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="s-mt-6">
+                    <button type="button" id="activate-btn"
+                            class="s-btn s-btn--primary s-btn--lg"
+                            data-i18n="acc.activate">Activar cuenta</button>
+                    <button type="button" id="go-to-login"
+                            class="s-btn s-btn--ghost s-btn--lg acc-hidden s-mt-4"
+                            data-i18n="acc.activated_login">Iniciar sesión</button>
+                </div>
+
+                <div id="activate-message" class="s-alert s-alert--success s-hidden s-mt-4"></div>
+            </section>
+
+            <p class="s-center s-mt-6 s-text-sm">
+                <span data-i18n="acc.have_account">¿Ya tienes cuenta?</span>
+                <a href="/index.html" data-i18n="acc.have_account_link">Inicia sesión</a>
+            </p>
+
+        </div>
+    </main>
+
+    <div id="santander-footer"></div>
+
+</body>
+</html>

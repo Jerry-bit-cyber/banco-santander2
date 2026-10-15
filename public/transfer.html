@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es-MX" data-lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Santander México — transferencias seguras en pesos a cualquier cuenta con CLABE.">
+    <title>Transferir — Santander México</title>
+
+    <link rel="stylesheet" href="/css/santander.css">
+
+    <script>
+      window.__SANTANDER_PAGE_DICT__ = {
+        es: {
+          'tr.eyebrow':              'Transferencias',
+          'tr.title':                'Transferir a otra cuenta',
+          'tr.lede':                 'Envía pesos a cualquier cuenta en México con CLABE o alias. Revisa antes de confirmar.',
+
+          'tr.step_1':               'Destino',
+          'tr.step_2':               'Monto',
+          'tr.step_3':               'Confirmación',
+          'tr.step_4':               'Resultado',
+
+          'tr.origin_title':         'Cuenta de origen',
+          'tr.origin_holder':        'Titular',
+          'tr.origin_available':     'Saldo disponible',
+          'tr.origin_pending':       'Saldo pendiente',
+
+          'tr.dest_title':           'Datos del destinatario',
+          'tr.dest_subtitle':        'Ingresa la CLABE (18 dígitos) o el alias registrado.',
+
+          'tr.dest_method_clabe':    'CLABE',
+          'tr.dest_method_alias':    'Alias',
+          'tr.dest_clabe_label':     'CLABE interbancaria',
+          'tr.dest_clabe_ph':        '014180000012345678',
+          'tr.dest_alias_label':     'Alias',
+          'tr.dest_alias_ph':        '@maria.lopez',
+          'tr.dest_name_label':      'Nombre del destinatario',
+          'tr.dest_name_ph':         'María López',
+          'tr.dest_email_label':     'Correo del destinatario (opcional)',
+          'tr.dest_email_ph':        'maria.lopez@correo.mx',
+          'tr.dest_reference_label': 'Concepto',
+          'tr.dest_reference_ph':    'Pago de servicios',
+
+          'tr.amount_title':         'Monto a transferir',
+          'tr.amount_label':         'Monto (MXN)',
+          'tr.amount_ph':            '0.00',
+          'tr.amount_hint':          'Monto mínimo $1.00. Máximo disponible según tu saldo.',
+          'tr.amount_available':     'Disponible:',
+
+          'tr.review_title':         'Revisa y confirma',
+          'tr.review_to':            'Para',
+          'tr.review_clabe':         'CLABE',
+          'tr.review_amount':        'Monto',
+          'tr.review_fee':           'Comisión',
+          'tr.review_fee_value':     '$0.00 MXN',
+          'tr.review_total':         'Total a debitar',
+          'tr.review_reference':     'Concepto',
+          'tr.review_confirm_text':  'Al confirmar, el monto se debitará de tu cuenta y la transferencia quedará en proceso hasta que se complete.',
+
+          'tr.btn_back':             'Atrás',
+          'tr.btn_continue':         'Continuar',
+          'tr.btn_send':             'Enviar transferencia',
+          'tr.btn_sending':          'Enviando…',
+          'tr.btn_new':              'Nueva transferencia',
+          'tr.btn_dashboard':        'Ir al panel',
+
+          'tr.result_pending_title': 'Transferencia en proceso',
+          'tr.result_pending_text':  'Tu transferencia fue registrada y está siendo procesada. Aparecerá como "En proceso" en tus movimientos hasta que se complete.',
+          'tr.result_failed_title':  'Transferencia no completada',
+          'tr.result_failed_text':   'No pudimos completar tu transferencia. El monto fue devuelto a tu saldo disponible.',
+          'tr.result_ref':           'Número de referencia',
+          'tr.result_amount':        'Monto',
+          'tr.result_to':            'Destinatario',
+
+          'tr.error_required':       'Por favor completa este campo.',
+          'tr.error_clabe':          'La CLABE debe tener 18 dígitos numéricos.',
+          'tr.error_alias':          'El alias debe iniciar con @ y tener al menos 3 caracteres.',
+          'tr.error_amount':         'Ingresa un monto válido.',
+          'tr.error_amount_min':     'El monto mínimo es $1.00 MXN.',
+          'tr.error_amount_max':     'El monto supera tu saldo disponible.',
+          'tr.error_same_account':   'No puedes transferir a tu propia cuenta.',
+          'tr.error_server':         'No pudimos completar la transferencia. Intenta de nuevo.'
+        },
+        en: {
+          'tr.eyebrow':              'Transfers',
+          'tr.title':                'Transfer to another account',
+          'tr.lede':                 'Send pesos to any account in Mexico using CLABE or alias. Review before confirming.',
+
+          'tr.step_1':               'Destination',
+          'tr.step_2':               'Amount',
+          'tr.step_3':               'Confirmation',
+          'tr.step_4':               'Result',
+
+          'tr.origin_title':         'Source account',
+          'tr.origin_holder':        'Holder',
+          'tr.origin_available':     'Available balance',
+          'tr.origin_pending':       'Pending balance',
+
+          'tr.dest_title':           'Recipient details',
+          'tr.dest_subtitle':        'Enter the CLABE (18 digits) or the registered alias.',
+
+          'tr.dest_method_clabe':    'CLABE',
+          'tr.dest_method_alias':    'Alias',
+          'tr.dest_clabe_label':     'Interbank CLABE',
+          'tr.dest_clabe_ph':        '014180000012345678',
+          'tr.dest_alias_label':     'Alias',
+          'tr.dest_alias_ph':        '@maria.lopez',
+          'tr.dest_name_label':      'Recipient name',
+          'tr.dest_name_ph':         'María López',
+          'tr.dest_email_label':     'Recipient email (optional)',
+          'tr.dest_email_ph':        'maria.lopez@mail.mx',
+          'tr.dest_reference_label': 'Reference',
+          'tr.dest_reference_ph':    'Service payment',
+
+          'tr.amount_title':         'Amount to transfer',
+          'tr.amount_label':         'Amount (MXN)',
+          'tr.amount_ph':            '0.00',
+          'tr.amount_hint':          'Minimum $1.00. Maximum per your available balance.',
+          'tr.amount_available':     'Available:',
+
+          'tr.review_title':         'Review and confirm',
+          'tr.review_to':            'To',
+          'tr.review_clabe':         'CLABE',
+          'tr.review_amount':        'Amount',
+          'tr.review_fee':           'Fee',
+          'tr.review_fee_value':     '$0.00 MXN',
+          'tr.review_total':         'Total to debit',
+          'tr.review_reference':     'Reference',
+          'tr.review_confirm_text':  'By confirming, the amount will be debited from your account and the transfer will remain in progress until completed.',
+
+          'tr.btn_back':             'Back',
+          'tr.btn_continue':         'Continue',
+          'tr.btn_send':             'Send transfer',
+          'tr.btn_sending':          'Sending…',
+          'tr.btn_new':              'New transfer',
+          'tr.btn_dashboard':        'Go to dashboard',
+
+          'tr.result_pending_title': 'Transfer in progress',
+          'tr.result_pending_text':  'Your transfer was recorded and is being processed. It will appear as "In progress" in your activity until completed.',
+          'tr.result_failed_title':  'Transfer not completed',
+          'tr.result_failed_text':   'We could not complete your transfer. The amount was returned to your available balance.',
+          'tr.result_ref':           'Reference number',
+          'tr.result_amount':        'Amount',
+          'tr.result_to':            'Recipient',
+
+          'tr.error_required':       'Please complete this field.',
+          'tr.error_clabe':          'CLABE must be 18 numeric digits.',
+          'tr.error_alias':          'Alias must start with @ and be at least 3 characters.',
+          'tr.error_amount':         'Enter a valid amount.',
+          'tr.error_amount_min':     'Minimum amount is $1.00 MXN.',
+          'tr.error_amount_max':     'Amount exceeds your available balance.',
+          'tr.error_same_account':   'You cannot transfer to your own account.',
+          'tr.error_server':         'We could not complete the transfer. Please try again.'
+        }
+      };
+    </script>
+
+    <style>
+      /* Page-scoped layout for the transfer flow. */
+      .tr-stepper {
+        display: flex; flex-wrap: wrap; gap: 1rem;
+        margin-top: var(--space-4);
+      }
+      .tr-step {
+        display: flex; align-items: center; gap: 10px;
+        font-size: var(--fs-sm); font-weight: 600;
+        color: var(--santander-gray-700);
+      }
+      .tr-step.is-active { color: var(--santander-red); }
+      .tr-step.is-done   { color: var(--color-success); }
+      .tr-step__num {
+        width: 26px; height: 26px; border-radius: 50%;
+        display: inline-flex; align-items: center; justify-content: center;
+        background: var(--santander-gray-100);
+        color: var(--santander-gray-700);
+        font-size: var(--fs-xs);
+      }
+      .tr-step.is-active .tr-step__num {
+        background: var(--santander-red); color: #fff;
+      }
+      .tr-step.is-done .tr-step__num {
+        background: var(--color-success); color: #fff;
+      }
+      .tr-panel { display: none; }
+      .tr-panel.is-visible { display: block; }
+
+      .tr-summary {
+        display: grid; gap: 12px;
+      }
+      .tr-summary__row {
+        display: flex; justify-content: space-between; gap: 1rem;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--santander-gray-100);
+      }
+      .tr-summary__row:last-child { border-bottom: none; }
+      .tr-summary__label { color: var(--santander-gray-700); font-size: var(--fs-sm); }
+      .tr-summary__value { font-weight: 600; text-align: right; }
+      .tr-summary__value--big { font-size: var(--fs-xl); }
+
+      .tr-amount-wrap {
+        display: flex; align-items: center; gap: 8px;
+        border: 1px solid var(--santander-gray-300);
+        border-radius: var(--radius-sm);
+        padding: 12px 14px;
+        background: #fff;
+      }
+      .tr-amount-wrap:focus-within {
+        border-color: var(--santander-red);
+        box-shadow: 0 0 0 3px rgba(236, 0, 0, 0.15);
+      }
+      .tr-amount-wrap__prefix {
+        font-size: var(--fs-lg); font-weight: 600;
+        color: var(--santander-gray-700);
+      }
+      .tr-amount-wrap input {
+        flex: 1; border: none; outline: none;
+        font-size: var(--fs-2xl); font-weight: 700;
+        background: transparent; color: var(--santander-dark);
+        font-variant-numeric: tabular-nums;
+        min-width: 0;
+      }
+      .tr-amount-wrap input::placeholder { color: var(--santander-gray-300); }
+
+      .tr-method {
+        display: inline-flex; gap: 0;
+        border: 1px solid var(--santander-gray-300);
+        border-radius: var(--radius-pill);
+        padding: 3px;
+        background: var(--santander-gray-100);
+      }
+      .tr-method button {
+        background: transparent; border: none;
+        font: inherit; font-size: var(--fs-sm); font-weight: 600;
+        color: var(--santander-gray-700);
+        padding: 8px 18px;
+        border-radius: var(--radius-pill);
+        cursor: pointer;
+      }
+      .tr-method button[aria-pressed="true"] {
+        background: #fff;
+        color: var(--santander-red);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      }
+
+      .tr-actions {
+        display: flex; gap: 12px; flex-wrap: wrap;
+        margin-top: var(--space-6);
+      }
+
+      .tr-receipt {
+        border: 1px dashed var(--santander-gray-300);
+        border-radius: var(--radius-md);
+        padding: var(--space-5);
+        background: #fff;
+      }
+      .tr-receipt__icon {
+        width: 48px; height: 48px;
+        display: inline-flex; align-items: center; justify-content: center;
+        border-radius: 50%;
+        margin-bottom: var(--space-3);
+      }
+      .tr-receipt__icon--pending { background: var(--color-warning-bg); color: var(--color-warning); }
+      .tr-receipt__icon--failed  { background: var(--color-danger-bg);  color: var(--color-danger); }
+      .tr-hidden { display: none !important; }
+    </style>
+
+    <script src="/js/santander.js" defer></script>
+    <script src="/js/transfer.js" defer></script>
+</head>
+<body>
+
+    <div id="santander-header"></div>
+
+    <main class="s-main">
+        <div class="s-container">
+
+            <!-- Intro -->
+            <div class="s-mt-4">
+                <span class="s-hero__eyebrow" data-i18n="tr.eyebrow">Transferencias</span>
+                <h1 class="s-mb-0" data-i18n="tr.title">Transferir a otra cuenta</h1>
+                <p class="s-muted" data-i18n="tr.lede">
+                    Envía pesos a cualquier cuenta en México con CLABE o alias.
+                    Revisa antes de confirmar.
+                </p>
+            </div>
+
+            <!-- Stepper -->
+            <div class="tr-stepper">
+                <div class="tr-step" data-step="1">
+                    <span class="tr-step__num">1</span>
+                    <span data-i18n="tr.step_1">Destino</span>
+                </div>
+                <div class="tr-step" data-step="2">
+                    <span class="tr-step__num">2</span>
+                    <span data-i18n="tr.step_2">Monto</span>
+                </div>
+                <div class="tr-step" data-step="3">
+                    <span class="tr-step__num">3</span>
+                    <span data-i18n="tr.step_3">Confirmación</span>
+                </div>
+                <div class="tr-step" data-step="4">
+                    <span class="tr-step__num">4</span>
+                    <span data-i18n="tr.step_4">Resultado</span>
+                </div>
+            </div>
+
+            <!-- Global error -->
+            <div
+                id="transfer-error"
+                class="s-alert s-alert--danger s-hidden s-mt-4"
+                role="alert"
+                aria-live="polite"
+            ></div>
+
+            <!-- ============================================================
+                 STEP 1 — Destination
+                 ============================================================ -->
+            <section class="tr-panel is-visible s-card s-mt-6" data-panel="1">
+
+                <!-- Origin account summary -->
+                <div class="s-card" style="background: var(--santander-cream); border: none; padding: var(--space-4); margin-bottom: var(--space-5);">
+                    <h3 style="margin: 0 0 var(--space-3); font-size: var(--fs-base);" data-i18n="tr.origin_title">Cuenta de origen</h3>
+                    <div style="display: grid; gap: 12px; grid-template-columns: 1fr;">
+                        <div class="s-row-between">
+                            <span class="s-text-sm s-muted" data-i18n="tr.origin_holder">Titular</span>
+                            <strong id="origin-holder">—</strong>
+                        </div>
+                        <div class="s-row-between">
+                            <span class="s-text-sm s-muted" data-i18n="tr.origin_available">Saldo disponible</span>
+                            <strong id="origin-available">$0.00</strong>
+                        </div>
+                        <div class="s-row-between">
+                            <span class="s-text-sm s-muted" data-i18n="tr.origin_pending">Saldo pendiente</span>
+                            <strong id="origin-pending">$0.00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="s-card__title" data-i18n="tr.dest_title">Datos del destinatario</h2>
+                <p class="s-card__subtitle" data-i18n="tr.dest_subtitle">
+                    Ingresa la CLABE (18 dígitos) o el alias registrado.
+                </p>
+
+                <form id="transfer-form" novalidate>
+
+                    <div class="tr-method" role="group" aria-label="Método de destino">
+                        <button type="button" data-method="clabe" aria-pressed="true"
+                                data-i18n="tr.dest_method_clabe">CLABE</button>
+                        <button type="button" data-method="alias" aria-pressed="false"
+                                data-i18n="tr.dest_method_alias">Alias</button>
+                    </div>
+
+                    <!-- CLABE field -->
+                    <div class="s-field s-mt-4" data-field="clabe">
+                        <label class="s-field__label" for="dest-clabe"
+                               data-i18n="tr.dest_clabe_label">CLABE interbancaria</label>
+                        <input type="text" id="dest-clabe" name="dest-clabe"
+                               class="s-field__input" inputmode="numeric" maxlength="18"
+                               autocomplete="off" spellcheck="false"
+                               data-i18n-placeholder="tr.dest_clabe_ph"
+                               placeholder="014180000012345678">
+                    </div>
+
+                    <!-- Alias field -->
+                    <div class="s-field s-mt-4 tr-hidden" data-field="alias">
+                        <label class="s-field__label" for="dest-alias"
+                               data-i18n="tr.dest_alias_label">Alias</label>
+                        <input type="text" id="dest-alias" name="dest-alias"
+                               class="s-field__input" maxlength="40"
+                               autocomplete="off" spellcheck="false"
+                               data-i18n-placeholder="tr.dest_alias_ph"
+                               placeholder="@maria.lopez">
+                    </div>
+
+                    <div class="s-field">
+                        <label class="s-field__label" for="dest-name"
+                               data-i18n="tr.dest_name_label">Nombre del destinatario</label>
+                        <input type="text" id="dest-name" name="dest-name"
+                               class="s-field__input" autocomplete="off"
+                               data-i18n-placeholder="tr.dest_name_ph"
+                               placeholder="María López">
+                    </div>
+
+                    <div class="s-field">
+                        <label class="s-field__label" for="dest-email"
+                               data-i18n="tr.dest_email_label">Correo del destinatario (opcional)</label>
+                        <input type="email" id="dest-email" name="dest-email"
+                               class="s-field__input" autocomplete="off"
+                               autocapitalize="none" spellcheck="false"
+                               data-i18n-placeholder="tr.dest_email_ph"
+                               placeholder="maria.lopez@correo.mx">
+                    </div>
+
+                    <div class="s-field">
+                        <label class="s-field__label" for="dest-reference"
+                               data-i18n="tr.dest_reference_label">Concepto</label>
+                        <input type="text" id="dest-reference" name="dest-reference"
+                               class="s-field__input" maxlength="80"
+                               data-i18n-placeholder="tr.dest_reference_ph"
+                               placeholder="Pago de servicios">
+                    </div>
+
+                    <div class="tr-actions">
+                        <button type="button" class="s-btn s-btn--primary" data-next="2"
+                                data-i18n="tr.btn_continue">Continuar</button>
+                        <a href="/dashboard.html" class="s-btn s-btn--ghost"
+                           data-i18n="tr.btn_dashboard">Ir al panel</a>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- ============================================================
+                 STEP 2 — Amount
+                 ============================================================ -->
+            <section class="tr-panel s-card s-mt-6" data-panel="2">
+                <h2 class="s-card__title" data-i18n="tr.amount_title">Monto a transferir</h2>
+
+                <div class="s-field">
+                    <label class="s-field__label" for="amount"
+                           data-i18n="tr.amount_label">Monto (MXN)</label>
+                    <div class="tr-amount-wrap">
+                        <span class="tr-amount-wrap__prefix">$</span>
+                        <input type="text" id="amount" name="amount"
+                               inputmode="decimal" autocomplete="off"
+                               data-i18n-placeholder="tr.amount_ph"
+                               placeholder="0.00">
+                        <span class="s-text-sm s-muted">MXN</span>
+                    </div>
+                    <span class="s-field__hint">
+                        <span data-i18n="tr.amount_hint">Monto mínimo $1.00.</span>
+                        <span data-i18n="tr.amount_available">Disponible:</span>
+                        <strong id="amount-available">$0.00</strong>
+                    </span>
+                </div>
+
+                <div class="tr-actions">
+                    <button type="button" class="s-btn s-btn--ghost" data-next="1"
+                            data-i18n="tr.btn_back">Atrás</button>
+                    <button type="button" class="s-btn s-btn--primary" data-next="3"
+                            data-i18n="tr.btn_continue">Continuar</button>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 STEP 3 — Review
+                 ============================================================ -->
+            <section class="tr-panel s-card s-mt-6" data-panel="3">
+                <h2 class="s-card__title" data-i18n="tr.review_title">Revisa y confirma</h2>
+
+                <div class="tr-summary s-mt-4">
+                    <div class="tr-summary__row">
+                        <span class="tr-summary__label" data-i18n="tr.review_to">Para</span>
+                        <span class="tr-summary__value" id="review-to">—</span>
+                    </div>
+                    <div class="tr-summary__row">
+                        <span class="tr-summary__label" data-i18n="tr.review_clabe">CLABE</span>
+                        <span class="tr-summary__value" id="review-clabe"
+                              style="font-family: var(--font-mono);">—</span>
+                    </div>
+                    <div class="tr-summary__row">
+                        <span class="tr-summary__label" data-i18n="tr.review_reference">Concepto</span>
+                        <span class="tr-summary__value" id="review-reference">—</span>
+                    </div>
+                    <div class="tr-summary__row">
+                        <span class="tr-summary__label" data-i18n="tr.review_amount">Monto</span>
+                        <span class="tr-summary__value" id="review-amount">$0.00</span>
+                    </div>
+                    <div class="tr-summary__row">
+                        <span class="tr-summary__label" data-i18n="tr.review_fee">Comisión</span>
+                        <span class="tr-summary__value" data-i18n="tr.review_fee_value">$0.00 MXN</span>
+                    </div>
+                    <div class="tr-summary__row">
+                        <span class="tr-summary__label" data-i18n="tr.review_total">Total a debitar</span>
+                        <span class="tr-summary__value tr-summary__value--big" id="review-total">$0.00</span>
+                    </div>
+                </div>
+
+                <p class="s-text-sm s-muted s-mt-4" data-i18n="tr.review_confirm_text">
+                    Al confirmar, el monto se debitará de tu cuenta y la transferencia
+                    quedará en proceso hasta que se complete.
+                </p>
+
+                <div class="tr-actions">
+                    <button type="button" class="s-btn s-btn--ghost" data-next="2"
+                            data-i18n="tr.btn_back">Atrás</button>
+                    <button type="button" id="confirm-send" class="s-btn s-btn--primary"
+                            data-i18n="tr.btn_send">Enviar transferencia</button>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 STEP 4 — Result
+                 ============================================================ -->
+            <section class="tr-panel s-card s-mt-6" data-panel="4">
+                <div class="tr-receipt">
+
+                    <div id="receipt-pending" class="tr-receipt__icon tr-receipt__icon--pending tr-hidden">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div id="receipt-failed" class="tr-receipt__icon tr-receipt__icon--failed tr-hidden">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+
+                    <h2 class="s-card__title" id="receipt-title" data-i18n="tr.result_pending_title">
+                        Transferencia en proceso
+                    </h2>
+                    <p class="s-muted" id="receipt-text" data-i18n="tr.result_pending_text">
+                        Tu transferencia fue registrada y está siendo procesada.
+                    </p>
+
+                    <div class="tr-summary s-mt-4">
+                        <div class="tr-summary__row">
+                            <span class="tr-summary__label" data-i18n="tr.result_ref">Número de referencia</span>
+                            <span class="tr-summary__value" id="receipt-ref"
+                                  style="font-family: var(--font-mono);">—</span>
+                        </div>
+                        <div class="tr-summary__row">
+                            <span class="tr-summary__label" data-i18n="tr.result_amount">Monto</span>
+                            <span class="tr-summary__value" id="receipt-amount">$0.00</span>
+                        </div>
+                        <div class="tr-summary__row">
+                            <span class="tr-summary__label" data-i18n="tr.result_to">Destinatario</span>
+                            <span class="tr-summary__value" id="receipt-to">—</span>
+                        </div>
+                    </div>
+
+                    <div class="tr-actions">
+                        <button type="button" id="btn-new-transfer" class="s-btn s-btn--primary"
+                                data-i18n="tr.btn_new">Nueva transferencia</button>
+                        <a href="/dashboard.html" class="s-btn s-btn--ghost"
+                           data-i18n="tr.btn_dashboard">Ir al panel</a>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="santander-footer"></div>
+
+</body>
+</html>

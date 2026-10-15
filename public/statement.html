@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es-MX" data-lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Santander México — estado de cuenta con movimientos y saldo.">
+    <title>Estado de Cuenta — Santander México</title>
+
+    <link rel="stylesheet" href="/css/santander.css">
+
+    <script>
+      window.__SANTANDER_PAGE_DICT__ = {
+        es: {
+          'stmt.eyebrow':            'Estado de cuenta',
+          'stmt.title':              'Estado de Cuenta',
+          'stmt.subtitle':           'Consulta y descarga el detalle de tus movimientos.',
+
+          'stmt.account_title':      'Datos de la cuenta',
+          'stmt.holder':             'Titular',
+          'stmt.account_number':     'Número de cuenta',
+          'stmt.clabe':              'CLABE interbancaria (SPEI)',
+          'stmt.currency':           'Moneda',
+          'stmt.currency_value':     'Peso Mexicano (MXN)',
+          'stmt.period':             'Periodo',
+          'stmt.period_value':       'Últimos 12 meses',
+          'stmt.generated':          'Generado',
+
+          'stmt.balance_available':  'Saldo disponible',
+          'stmt.balance_pending':    'Saldo pendiente',
+          'stmt.balance_total':      'Saldo total',
+
+          'stmt.filters_title':      'Filtros',
+          'stmt.filter_from':        'Desde',
+          'stmt.filter_to':          'Hasta',
+          'stmt.filter_status':      'Estado',
+          'stmt.filter_status_all':  'Todos',
+          'stmt.filter_status_pending':   'En proceso',
+          'stmt.filter_status_completed': 'Completadas',
+          'stmt.filter_status_failed':    'Fallidas',
+          'stmt.filter_apply':       'Aplicar',
+          'stmt.filter_reset':       'Restablecer',
+          'stmt.filter_export':      'Imprimir / Guardar PDF',
+
+          'stmt.tx_title':           'Movimientos',
+          'stmt.tx_count':           'movimientos',
+          'stmt.tx_empty':           'No hay movimientos en el periodo seleccionado.',
+
+          'stmt.col_date':           'Fecha',
+          'stmt.col_description':    'Descripción',
+          'stmt.col_reference':      'Referencia',
+          'stmt.col_amount':         'Monto',
+          'stmt.col_balance':        'Saldo',
+          'stmt.col_status':         'Estado',
+
+          'stmt.status_pending':     'En proceso',
+          'stmt.status_completed':   'Completada',
+          'stmt.status_failed':      'Fallida',
+
+          'stmt.summary_credits':    'Abonos',
+          'stmt.summary_debits':     'Cargos',
+          'stmt.summary_net':        'Neto del periodo',
+
+          'stmt.error_load':         'No se pudo cargar tu estado de cuenta.',
+          'stmt.error_session':      'Tu sesión expiró. Por favor inicia sesión de nuevo.'
+        },
+        en: {
+          'stmt.eyebrow':            'Account statement',
+          'stmt.title':              'Account Statement',
+          'stmt.subtitle':           'Review and download the details of your activity.',
+
+          'stmt.account_title':      'Account details',
+          'stmt.holder':             'Holder',
+          'stmt.account_number':     'Account number',
+          'stmt.clabe':              'Interbank CLABE (SPEI)',
+          'stmt.currency':           'Currency',
+          'stmt.currency_value':     'Mexican Peso (MXN)',
+          'stmt.period':             'Period',
+          'stmt.period_value':       'Last 12 months',
+          'stmt.generated':          'Generated',
+
+          'stmt.balance_available':  'Available balance',
+          'stmt.balance_pending':    'Pending balance',
+          'stmt.balance_total':      'Total balance',
+
+          'stmt.filters_title':      'Filters',
+          'stmt.filter_from':        'From',
+          'stmt.filter_to':          'To',
+          'stmt.filter_status':      'Status',
+          'stmt.filter_status_all':  'All',
+          'stmt.filter_status_pending':   'In progress',
+          'stmt.filter_status_completed': 'Completed',
+          'stmt.filter_status_failed':    'Failed',
+          'stmt.filter_apply':       'Apply',
+          'stmt.filter_reset':       'Reset',
+          'stmt.filter_export':      'Print / Save PDF',
+
+          'stmt.tx_title':           'Transactions',
+          'stmt.tx_count':           'transactions',
+          'stmt.tx_empty':           'No transactions in the selected period.',
+
+          'stmt.col_date':           'Date',
+          'stmt.col_description':    'Description',
+          'stmt.col_reference':      'Reference',
+          'stmt.col_amount':         'Amount',
+          'stmt.col_balance':        'Balance',
+          'stmt.col_status':         'Status',
+
+          'stmt.status_pending':     'In progress',
+          'stmt.status_completed':   'Completed',
+          'stmt.status_failed':      'Failed',
+
+          'stmt.summary_credits':    'Credits',
+          'stmt.summary_debits':     'Debits',
+          'stmt.summary_net':        'Net for period',
+
+          'stmt.error_load':         'Could not load your statement.',
+          'stmt.error_session':      'Your session expired. Please sign in again.'
+        }
+      };
+    </script>
+
+    <style>
+      .stmt-header-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 700px) {
+        .stmt-header-grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (min-width: 1000px) {
+        .stmt-header-grid { grid-template-columns: 1fr 1fr 1fr; }
+      }
+
+      .stmt-header-item {
+        padding: var(--space-3) 0;
+      }
+      .stmt-header-item__label {
+        font-size: var(--fs-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--santander-gray-700);
+        margin-bottom: 4px;
+      }
+      .stmt-header-item__value {
+        font-weight: var(--fw-semibold);
+        color: var(--santander-dark);
+      }
+      .stmt-header-item__value--mono {
+        font-family: var(--font-mono);
+      }
+
+      .stmt-summary {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 700px) {
+        .stmt-summary { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      .stmt-summary__item {
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+        background: var(--santander-white);
+        border: 1px solid var(--santander-gray-300);
+      }
+      .stmt-summary__label {
+        font-size: var(--fs-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--santander-gray-700);
+        margin-bottom: 6px;
+      }
+      .stmt-summary__value {
+        font-size: var(--fs-xl);
+        font-weight: var(--fw-bold);
+        font-variant-numeric: tabular-nums;
+      }
+      .stmt-summary__value--credit { color: var(--color-success); }
+      .stmt-summary__value--debit  { color: var(--santander-dark); }
+      .stmt-summary__value--net    { color: var(--santander-red); }
+
+      .stmt-filters {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+        align-items: end;
+      }
+      @media (min-width: 700px) {
+        .stmt-filters { grid-template-columns: 1fr 1fr 1fr auto auto; }
+      }
+
+      .stmt-filters .s-field { margin-bottom: 0; }
+
+      .stmt-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+        margin-bottom: var(--space-3);
+      }
+
+      .stmt-count {
+        font-size: var(--fs-sm);
+        color: var(--santander-gray-700);
+      }
+
+      .stmt-amount-credit::before { content: "+"; margin-right: 2px; }
+      .stmt-amount-debit::before  { content: "−"; margin-right: 2px; }
+
+      .stmt-tx-ref {
+        font-family: var(--font-mono);
+        font-size: var(--fs-xs);
+        color: var(--santander-gray-700);
+      }
+    </style>
+
+    <script src="/js/santander.js" defer></script>
+    <script src="/js/statement.js" defer></script>
+</head>
+<body>
+
+    <div id="santander-header"></div>
+
+    <main class="s-main">
+        <div class="s-container">
+
+            <!-- Intro -->
+            <div class="s-mt-4">
+                <span class="s-hero__eyebrow" data-i18n="stmt.eyebrow">Estado de cuenta</span>
+                <h1 class="s-mb-0" data-i18n="stmt.title">Estado de Cuenta</h1>
+                <p class="s-muted" data-i18n="stmt.subtitle">
+                    Consulta y descarga el detalle de tus movimientos.
+                </p>
+            </div>
+
+            <!-- Global error -->
+            <div
+                id="statement-error"
+                class="s-alert s-alert--danger s-hidden s-mt-4"
+                role="alert"
+                aria-live="polite"
+            ></div>
+
+            <!-- Account header card -->
+            <section class="s-card s-mt-6">
+                <h2 class="s-card__title" data-i18n="stmt.account_title">Datos de la cuenta</h2>
+
+                <div class="stmt-header-grid s-mt-4">
+
+                    <div class="stmt-header-item">
+                        <div class="stmt-header-item__label" data-i18n="stmt.holder">Titular</div>
+                        <div class="stmt-header-item__value" id="stmt-holder">—</div>
+                    </div>
+
+                    <div class="stmt-header-item">
+                        <div class="stmt-header-item__label" data-i18n="stmt.account_number">Número de cuenta</div>
+                        <div class="stmt-header-item__value stmt-header-item__value--mono" id="stmt-account-number">—</div>
+                    </div>
+
+                    <div class="stmt-header-item">
+                        <div class="stmt-header-item__label" data-i18n="stmt.clabe">CLABE interbancaria (SPEI)</div>
+                        <div class="stmt-header-item__value stmt-header-item__value--mono" id="stmt-clabe">—</div>
+                    </div>
+
+                    <div class="stmt-header-item">
+                        <div class="stmt-header-item__label" data-i18n="stmt.currency">Moneda</div>
+                        <div class="stmt-header-item__value" data-i18n="stmt.currency_value">
+                            Peso Mexicano (MXN)
+                        </div>
+                    </div>
+
+                    <div class="stmt-header-item">
+                        <div class="stmt-header-item__label" data-i18n="stmt.period">Periodo</div>
+                        <div class="stmt-header-item__value" data-i18n="stmt.period_value">
+                            Últimos 12 meses
+                        </div>
+                    </div>
+
+                    <div class="stmt-header-item">
+                        <div class="stmt-header-item__label" data-i18n="stmt.generated">Generado</div>
+                        <div class="stmt-header-item__value" id="stmt-generated">—</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Balance summary -->
+            <section class="s-mt-6">
+                <div class="stmt-summary">
+                    <div class="stmt-summary__item">
+                        <div class="stmt-summary__label" data-i18n="stmt.balance_available">Saldo disponible</div>
+                        <div class="stmt-summary__value" id="stmt-balance-available">$0.00</div>
+                    </div>
+                    <div class="stmt-summary__item">
+                        <div class="stmt-summary__label" data-i18n="stmt.balance_pending">Saldo pendiente</div>
+                        <div class="stmt-summary__value" id="stmt-balance-pending">$0.00</div>
+                    </div>
+                    <div class="stmt-summary__item" style="background: var(--santander-cream); border-color: var(--santander-red);">
+                        <div class="stmt-summary__label" data-i18n="stmt.balance_total">Saldo total</div>
+                        <div class="stmt-summary__value stmt-summary__value--net" id="stmt-balance-total">$0.00</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filters -->
+            <section class="s-card s-mt-6">
+                <h2 class="s-card__title" data-i18n="stmt.filters_title">Filtros</h2>
+
+                <div class="stmt-filters s-mt-4">
+
+                    <div class="s-field">
+                        <label class="s-field__label" for="filter-from"
+                               data-i18n="stmt.filter_from">Desde</label>
+                        <input type="date" id="filter-from" class="s-field__input">
+                    </div>
+
+                    <div class="s-field">
+                        <label class="s-field__label" for="filter-to"
+                               data-i18n="stmt.filter_to">Hasta</label>
+                        <input type="date" id="filter-to" class="s-field__input">
+                    </div>
+
+                    <div class="s-field">
+                        <label class="s-field__label" for="filter-status"
+                               data-i18n="stmt.filter_status">Estado</label>
+                        <select id="filter-status" class="s-field__select">
+                            <option value="all" data-i18n="stmt.filter_status_all">Todos</option>
+                            <option value="pending" data-i18n="stmt.filter_status_pending">En proceso</option>
+                            <option value="completed" data-i18n="stmt.filter_status_completed">Completadas</option>
+                            <option value="failed" data-i18n="stmt.filter_status_failed">Fallidas</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="filter-apply"
+                            class="s-btn s-btn--primary"
+                            data-i18n="stmt.filter_apply">Aplicar</button>
+
+                    <button type="button" id="filter-reset"
+                            class="s-btn s-btn--ghost"
+                            data-i18n="stmt.filter_reset">Restablecer</button>
+
+                </div>
+            </section>
+
+            <!-- Period summary (computed from filtered rows) -->
+            <section class="s-mt-6">
+                <div class="stmt-summary">
+                    <div class="stmt-summary__item">
+                        <div class="stmt-summary__label" data-i18n="stmt.summary_credits">Abonos</div>
+                        <div class="stmt-summary__value stmt-summary__value--credit" id="stmt-sum-credits">$0.00</div>
+                    </div>
+                    <div class="stmt-summary__item">
+                        <div class="stmt-summary__label" data-i18n="stmt.summary_debits">Cargos</div>
+                        <div class="stmt-summary__value stmt-summary__value--debit" id="stmt-sum-debits">$0.00</div>
+                    </div>
+                    <div class="stmt-summary__item">
+                        <div class="stmt-summary__label" data-i18n="stmt.summary_net">Neto del periodo</div>
+                        <div class="stmt-summary__value stmt-summary__value--net" id="stmt-sum-net">$0.00</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions -->
+            <section class="s-mt-6">
+                <div class="stmt-toolbar">
+                    <h2 class="s-mb-0" style="font-size: var(--fs-lg);"
+                        data-i18n="stmt.tx_title">Movimientos</h2>
+
+                    <div class="s-row" style="gap: 1rem;">
+                        <span class="stmt-count">
+                            <span id="stmt-count">0</span>
+                            <span data-i18n="stmt.tx_count">movimientos</span>
+                        </span>
+                        <button type="button" id="print-btn"
+                                class="s-btn s-btn--ghost"
+                                data-i18n="stmt.filter_export">Imprimir / Guardar PDF</button>
+                    </div>
+                </div>
+
+                <div class="s-table-wrap">
+                    <table class="s-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="stmt.col_date">Fecha</th>
+                                <th data-i18n="stmt.col_description">Descripción</th>
+                                <th data-i18n="stmt.col_reference">Referencia</th>
+                                <th class="s-amount" data-i18n="stmt.col_amount">Monto</th>
+                                <th class="s-amount" data-i18n="stmt.col_balance">Saldo</th>
+                                <th data-i18n="stmt.col_status">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statement-table">
+                            <tr>
+                                <td colspan="6" class="s-center s-muted s-text-sm">
+                                    <span data-i18n="stmt.tx_empty">Cargando movimientos…</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="santander-footer"></div>
+
+</body>
+</html>

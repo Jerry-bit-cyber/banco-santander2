@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Santander México — secure digital banking. Sign in to manage your accounts.">
+    <title>Santander México — Digital Banking</title>
+
+    <link rel="stylesheet" href="/css/santander.css">
+
+    <script>
+      window.__SANTANDER_PAGE_DICT__ = {
+        en: {
+          'home.eyebrow':            'Digital banking',
+          'home.title':              'Your bank, in your hands.',
+          'home.lede':               'Manage your accounts, make transfers and review your activity from anywhere. Security and support from Santander México.',
+          'home.bullet_1':           'Secure sign-in with encrypted sessions',
+          'home.bullet_2':           'Mexican pesos (MXN) and SPEI-compatible CLABE',
+          'home.bullet_3':           'Support 24/7 by chat and phone',
+
+          'home.login_title':        'Sign In',
+          'home.login_subtitle':     'Enter your username and password.',
+          'home.username_label':     'Username',
+          'home.username_ph':        'carlos.hernandez',
+          'home.password_label':     'Password',
+          'home.password_ph':        '••••••••',
+          'home.login_submit':       'Sign In',
+          'home.forgot':             'Forgot your password?',
+          'home.open_account':       'Open a new account',
+
+          'home.trust_protected_t':  'Protected data',
+          'home.trust_protected_x':  'Encryption in transit and server-signed sessions.',
+          'home.trust_support_t':    '24/7 Support',
+          'home.trust_support_x':    'Chat with an agent and phone support every day.',
+          'home.trust_regulated_t':  'Made for Mexico',
+          'home.trust_regulated_x':  'Spanish interface, Mexican pesos and CLABE for transfers.',
+
+          'home.error_invalid':      'Invalid username or password.',
+          'home.error_network':      'Could not reach the server. Please try again.',
+          'home.error_empty':        'Please enter your username and password.'
+        },
+        es: {
+          'home.eyebrow':            'Banca digital',
+          'home.title':              'Tu banco, en tus manos.',
+          'home.lede':               'Administra tus cuentas, realiza transferencias y consulta tus movimientos desde cualquier lugar. Seguridad y respaldo Santander México.',
+          'home.bullet_1':           'Inicio de sesión seguro con sesiones cifradas',
+          'home.bullet_2':           'Pesos mexicanos (MXN) y CLABE compatible con SPEI',
+          'home.bullet_3':           'Soporte 24/7 por chat y teléfono',
+
+          'home.login_title':        'Iniciar Sesión',
+          'home.login_subtitle':     'Ingresa con tu usuario y contraseña.',
+          'home.username_label':     'Usuario',
+          'home.username_ph':        'carlos.hernandez',
+          'home.password_label':     'Contraseña',
+          'home.password_ph':        '••••••••',
+          'home.login_submit':       'Iniciar Sesión',
+          'home.forgot':             '¿Olvidaste tu contraseña?',
+          'home.open_account':       'Abrir una cuenta nueva',
+
+          'home.trust_protected_t':  'Datos protegidos',
+          'home.trust_protected_x':  'Cifrado en tránsito y sesiones firmadas del lado del servidor.',
+          'home.trust_support_t':    'Soporte 24/7',
+          'home.trust_support_x':    'Chat con un agente y atención telefónica todos los días.',
+          'home.trust_regulated_t':  'Hecho para México',
+          'home.trust_regulated_x':  'Interfaz en español, pesos mexicanos y CLABE para transferencias.',
+
+          'home.error_invalid':      'Usuario o contraseña incorrectos.',
+          'home.error_network':      'No se pudo conectar con el servidor. Intenta de nuevo.',
+          'home.error_empty':        'Por favor ingresa tu usuario y contraseña.'
+        }
+      };
+    </script>
+
+    <style>
+      /* Page-scoped polish on top of santander.css */
+      .home-hero {
+        display: grid;
+        gap: var(--space-7);
+        align-items: center;
+        padding: var(--space-6) 0 var(--space-7);
+      }
+      @media (min-width: 900px) {
+        .home-hero { grid-template-columns: 1.1fr 1fr; }
+      }
+
+      .home-bullets {
+        list-style: none;
+        padding: 0;
+        margin: var(--space-5) 0 0;
+        display: grid;
+        gap: 10px;
+      }
+      .home-bullets li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: var(--fs-sm);
+        color: var(--santander-gray-900);
+      }
+      .home-bullets svg {
+        flex: 0 0 18px;
+        margin-top: 3px;
+        color: var(--santander-red);
+      }
+
+      .home-card {
+        background: var(--santander-white);
+        border: 1px solid var(--santander-gray-300);
+        border-radius: var(--radius-lg);
+        padding: var(--space-6);
+        box-shadow: var(--shadow-md);
+      }
+      .home-card h2 {
+        font-size: var(--fs-2xl);
+        margin-bottom: var(--space-2);
+      }
+      .home-card .sub {
+        color: var(--santander-gray-700);
+        font-size: var(--fs-sm);
+        margin-bottom: var(--space-5);
+      }
+
+      .home-links {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: var(--space-4);
+        text-align: center;
+      }
+      .home-links a { font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
+      .home-links .secondary { color: var(--santander-gray-700); }
+      .home-links .secondary:hover { color: var(--santander-red); }
+
+      .home-trust {
+        display: grid;
+        gap: var(--space-4);
+        margin-top: var(--space-7);
+      }
+      @media (min-width: 700px) {
+        .home-trust { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      .home-trust__item {
+        background: var(--santander-white);
+        border: 1px solid var(--santander-gray-300);
+        border-radius: var(--radius-md);
+        padding: var(--space-5);
+      }
+      .home-trust__icon {
+        width: 32px; height: 32px;
+        color: var(--santander-red);
+        margin-bottom: var(--space-3);
+      }
+      .home-trust__title {
+        font-size: var(--fs-base);
+        font-weight: var(--fw-bold);
+        margin: 0 0 4px;
+      }
+      .home-trust__text {
+        font-size: var(--fs-sm);
+        color: var(--santander-gray-700);
+        margin: 0;
+      }
+    </style>
+
+    <script src="/js/santander.js" defer></script>
+    <script src="/js/auth.js" defer></script>
+</head>
+<body>
+
+    <div id="santander-header"></div>
+
+    <main class="s-main">
+        <div class="s-container">
+
+            <section class="home-hero">
+
+                <!-- Left column -->
+                <div>
+                    <span class="s-hero__eyebrow" data-i18n="home.eyebrow">
+                        Digital banking
+                    </span>
+
+                    <h1 class="s-hero__title" data-i18n="home.title">
+                        Your bank, in your hands.
+                    </h1>
+
+                    <p class="s-hero__lede" data-i18n="home.lede">
+                        Manage your accounts, make transfers and review your
+                        activity from anywhere. Security and support from
+                        Santander México.
+                    </p>
+
+                    <ul class="home-bullets">
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span data-i18n="home.bullet_1">
+                                Secure sign-in with encrypted sessions
+                            </span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span data-i18n="home.bullet_2">
+                                Mexican pesos (MXN) and SPEI-compatible CLABE
+                            </span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span data-i18n="home.bullet_3">
+                                Support 24/7 by chat and phone
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right column — login card -->
+                <div class="home-card">
+
+                    <h2 data-i18n="home.login_title">Sign In</h2>
+                    <p class="sub" data-i18n="home.login_subtitle">
+                        Enter your username and password.
+                    </p>
+
+                    <div
+                        id="login-error"
+                        class="s-alert s-alert--danger s-hidden"
+                        role="alert"
+                        aria-live="polite"
+                    ></div>
+
+                    <form id="login-form" novalidate>
+
+                        <div class="s-field">
+                            <label class="s-field__label" for="username"
+                                   data-i18n="home.username_label">Username</label>
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                class="s-field__input"
+                                autocomplete="username"
+                                autocapitalize="none"
+                                spellcheck="false"
+                                required
+                                data-i18n-placeholder="home.username_ph"
+                                placeholder="carlos.hernandez"
+                            >
+                        </div>
+
+                        <div class="s-field">
+                            <label class="s-field__label" for="password"
+                                   data-i18n="home.password_label">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="s-field__input"
+                                autocomplete="current-password"
+                                required
+                                data-i18n-placeholder="home.password_ph"
+                                placeholder="••••••••"
+                            >
+                        </div>
+
+                        <button
+                            type="submit"
+                            id="login-submit"
+                            class="s-btn s-btn--primary s-btn--block s-btn--lg"
+                            data-i18n="home.login_submit"
+                        >Sign In</button>
+
+                        <div class="home-links">
+                            <a href="#" data-i18n="home.forgot">
+                                Forgot your password?
+                            </a>
+                            <a href="/account.html" class="secondary"
+                               data-i18n="home.open_account">
+                                Open a new account
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+
+            </section>
+
+            <section class="home-trust">
+
+                <div class="home-trust__item">
+                    <svg class="home-trust__icon" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                    <h3 class="home-trust__title" data-i18n="home.trust_protected_t">
+                        Protected data
+                    </h3>
+                    <p class="home-trust__text" data-i18n="home.trust_protected_x">
+                        Encryption in transit and server-signed sessions.
+                    </p>
+                </div>
+
+                <div class="home-trust__item">
+                    <svg class="home-trust__icon" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <h3 class="home-trust__title" data-i18n="home.trust_support_t">
+                        24/7 Support
+                    </h3>
+                    <p class="home-trust__text" data-i18n="home.trust_support_x">
+                        Chat with an agent and phone support every day.
+                    </p>
+                </div>
+
+                <div class="home-trust__item">
+                    <svg class="home-trust__icon" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M3 12h18"/>
+                        <path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/>
+                    </svg>
+                    <h3 class="home-trust__title" data-i18n="home.trust_regulated_t">
+                        Made for Mexico
+                    </h3>
+                    <p class="home-trust__text" data-i18n="home.trust_regulated_x">
+                        Spanish interface, Mexican pesos and CLABE for transfers.
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <div id="santander-footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es-MX" data-lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Santander México — banca digital segura. Inicia sesión para administrar tus cuentas.">
+    <title>Santander México — Banca Digital</title>
+
+    <link rel="stylesheet" href="/css/santander.css">
+
+    <!--
+      Page-scoped translations. Merged into Santander.js's dictionary
+      BEFORE any of this page's [data-i18n] elements are translated.
+      This script runs synchronously and Santander.js is loaded with
+      `defer`, so ordering is guaranteed: this runs first, then
+      Santander.js boots and picks up the extended dictionary.
+    -->
+    <script>
+      window.__SANTANDER_PAGE_DICT__ = {
+        es: {
+          'home.eyebrow':            'Banca digital',
+          'home.title':              'Tu banco, en tus manos.',
+          'home.lede':               'Administra tus cuentas, realiza transferencias y consulta tus movimientos desde cualquier lugar. Seguridad y respaldo Santander México.',
+          'home.login_title':        'Iniciar Sesión',
+          'home.login_subtitle':     'Ingresa con tu usuario y contraseña.',
+          'home.username_label':     'Usuario',
+          'home.username_ph':        'carlos.hernandez',
+          'home.password_label':     'Contraseña',
+          'home.password_ph':        '••••••••',
+          'home.login_submit':       'Iniciar Sesión',
+          'home.forgot':             '¿Olvidaste tu contraseña?',
+          'home.open_account':       'Abrir una cuenta nueva',
+          'home.trust_protected_t':  'Datos protegidos',
+          'home.trust_protected_x':  'Cifrado en tránsito y sesiones firmadas del lado del servidor.',
+          'home.trust_support_t':    'Soporte 24/7',
+          'home.trust_support_x':    'Chat con un agente y atención telefónica todos los días.',
+          'home.trust_regulated_t':  'Hecho para México',
+          'home.trust_regulated_x':  'Interfaz en español, pesos mexicanos y CLABE para transferencias.',
+          'home.error_invalid':      'Usuario o contraseña incorrectos.',
+          'home.error_network':      'No se pudo conectar con el servidor. Intenta de nuevo.',
+          'home.error_empty':        'Por favor ingresa tu usuario y contraseña.'
+        },
+        en: {
+          'home.eyebrow':            'Digital banking',
+          'home.title':              'Your bank, in your hands.',
+          'home.lede':               'Manage your accounts, make transfers and review your activity from anywhere. Security and support from Santander México.',
+          'home.login_title':        'Sign In',
+          'home.login_subtitle':     'Sign in with your username and password.',
+          'home.username_label':     'Username',
+          'home.username_ph':        'carlos.hernandez',
+          'home.password_label':     'Password',
+          'home.password_ph':        '••••••••',
+          'home.login_submit':       'Sign In',
+          'home.forgot':             'Forgot your password?',
+          'home.open_account':       'Open a new account',
+          'home.trust_protected_t':  'Protected data',
+          'home.trust_protected_x':  'Encryption in transit and server-signed sessions.',
+          'home.trust_support_t':    '24/7 Support',
+          'home.trust_support_x':    'Chat with an agent and phone support every day.',
+          'home.trust_regulated_t':  'Made for Mexico',
+          'home.trust_regulated_x':  'Spanish interface, Mexican pesos and CLABE for transfers.',
+          'home.error_invalid':      'Invalid username or password.',
+          'home.error_network':      'Could not reach the server. Please try again.',
+          'home.error_empty':        'Please enter your username and password.'
+        }
+      };
+    </script>
+
+    <script src="/js/santander.js" defer></script>
+    <script src="/js/auth.js" defer></script>
+</head>
+<body>
+
+    <!-- Header is injected by /js/santander.js -->
+    <div id="santander-header"></div>
+
+    <main class="s-main">
+        <div class="s-container">
+
+            <section class="s-hero">
+
+                <!-- Left column: value proposition -->
+                <div>
+                    <span class="s-hero__eyebrow" data-i18n="home.eyebrow">
+                        Banca digital
+                    </span>
+
+                    <h1 class="s-hero__title" data-i18n="home.title">
+                        Tu banco, en tus manos.
+                    </h1>
+
+                    <p class="s-hero__lede" data-i18n="home.lede">
+                        Administra tus cuentas, realiza transferencias y consulta
+                        tus movimientos desde cualquier lugar. Seguridad y respaldo
+                        Santander México.
+                    </p>
+                </div>
+
+                <!-- Right column: login card -->
+                <div>
+                    <div class="s-card s-card--elevated">
+
+                        <h2 class="s-card__title" data-i18n="home.login_title">
+                            Iniciar Sesión
+                        </h2>
+
+                        <p class="s-card__subtitle" data-i18n="home.login_subtitle">
+                            Ingresa con tu usuario y contraseña.
+                        </p>
+
+                        <!--
+                          Inline error region. Populated by auth.js.
+                          Kept empty by default so it does not shift layout.
+                        -->
+                        <div
+                            id="login-error"
+                            class="s-alert s-alert--danger s-hidden"
+                            role="alert"
+                            aria-live="polite"
+                        ></div>
+
+                        <form id="login-form" novalidate>
+
+                            <div class="s-field">
+                                <label
+                                    class="s-field__label"
+                                    for="username"
+                                    data-i18n="home.username_label"
+                                >Usuario</label>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    class="s-field__input"
+                                    autocomplete="username"
+                                    autocapitalize="none"
+                                    spellcheck="false"
+                                    required
+                                    data-i18n-placeholder="home.username_ph"
+                                    placeholder="carlos.hernandez"
+                                >
+                            </div>
+
+                            <div class="s-field">
+                                <label
+                                    class="s-field__label"
+                                    for="password"
+                                    data-i18n="home.password_label"
+                                >Contraseña</label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="s-field__input"
+                                    autocomplete="current-password"
+                                    required
+                                    data-i18n-placeholder="home.password_ph"
+                                    placeholder="••••••••"
+                                >
+                            </div>
+
+                            <button
+                                type="submit"
+                                id="login-submit"
+                                class="s-btn s-btn--primary s-btn--block s-btn--lg"
+                                data-i18n="home.login_submit"
+                            >Iniciar Sesión</button>
+
+                            <p class="s-center s-mt-4 s-mb-0 s-text-sm">
+                                <a href="#" id="forgot-link" data-i18n="home.forgot">
+                                    ¿Olvidaste tu contraseña?
+                                </a>
+                            </p>
+
+                            <p class="s-center s-mt-4 s-mb-0 s-text-sm">
+                                <a href="/account.html" data-i18n="home.open_account">
+                                    Abrir una cuenta nueva
+                                </a>
+                            </p>
+
+                        </form>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Trust strip -->
+            <section class="s-trust">
+
+                <div class="s-trust__item">
+                    <svg class="s-trust__icon" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                    <h3 class="s-trust__title" data-i18n="home.trust_protected_t">
+                        Datos protegidos
+                    </h3>
+                    <p class="s-trust__text" data-i18n="home.trust_protected_x">
+                        Cifrado en tránsito y sesiones firmadas del lado del servidor.
+                    </p>
+                </div>
+
+                <div class="s-trust__item">
+                    <svg class="s-trust__icon" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <h3 class="s-trust__title" data-i18n="home.trust_support_t">
+                        Soporte 24/7
+                    </h3>
+                    <p class="s-trust__text" data-i18n="home.trust_support_x">
+                        Chat con un agente y atención telefónica todos los días.
+                    </p>
+                </div>
+
+                <div class="s-trust__item">
+                    <svg class="s-trust__icon" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M3 12h18"/>
+                        <path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/>
+                    </svg>
+                    <h3 class="s-trust__title" data-i18n="home.trust_regulated_t">
+                        Hecho para México
+                    </h3>
+                    <p class="s-trust__text" data-i18n="home.trust_regulated_x">
+                        Interfaz en español, pesos mexicanos y CLABE para transferencias.
+                    </p>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer is injected by /js/santander.js -->
+    <div id="santander-footer"></div>
+
+</body>
+</html>
